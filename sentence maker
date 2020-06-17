@@ -1,0 +1,46 @@
+'''
+Putting pieces together: Building a program.
+Basically, have an input that always runs until someone writes /end.
+Print out everything the user wrote. 
+If the user wrote a question, add a ? at the end.
+I could make it more complex (like check if the ending already has a ? or .)
+But this is what I came up very quickly before looking at solutions:
+'''
+storage=[]
+while True:
+    text=input("Say something")
+    if text=='\end' or text=='/end':
+        break
+    else:
+        words=text.split()
+        first=words[0].capitalize()
+        if first in ['What', 'How', 'Why', 'Who', 'Where']:    
+            storage.append(text+'?')
+        else:
+            storage.append(text+'.')
+print(storage) 
+
+
+'''
+Here is the best solution that is slightly more readable:
+'''
+def sentence_maker(phrase):
+    ogatives=("how", "what", "why")
+    capitalized=phrase.capitalize()
+    if phrase.startswith(ogatives):
+        return "{}?".format(capitalized)
+    else:
+        return "{}".format(capitalized)
+    
+print(sentence_maker("how are you"))
+
+results=[]
+while True:
+    user_input=input("Say something: ")
+    if user_input=='\end':
+        break
+    else:
+        results.append(sentence_maker(user_input))
+#print(results)
+final=" ".join(results)
+print(final)
