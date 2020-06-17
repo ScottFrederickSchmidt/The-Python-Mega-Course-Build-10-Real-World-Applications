@@ -1,0 +1,117 @@
+'''
+List comprenhension was the section in the course that was useful practice:
+'''
+temps=[221, 234, 340, -9999, 230, -9999]
+new_temps= [temp/10 for temp in temps if temp !=-9999]
+print(new_temps, "==>Divde by 10, get rid of -9999")
+
+sentence='the rocket came back from mars'
+vowels=[i for i in sentence if i in 'aeiou']
+print(vowels, "==>Should only be vowels")
+
+#final answer
+def foo(nums):
+    return [i if type(i)==int else 0 for i in nums]
+
+[i*2 if i>0 else 0 for i in [1, -2, 10]] #multiply by 2 if greater than 0
+
+[i*2 if type(i)==int else 0 for i in [1, 'no', 10]]
+
+
+
+
+
+#Remove items 2, 3, 4 from seconds list:
+seconds = [1.2323442655, 1.4534345567, 1.023458894, 1.10001399445]
+'''
+This attempt fails because once you remove 1 index, the 3 index becomes out of range!
+seconds.remove(seconds[1])
+seconds.remove(seconds[2])
+seconds.remove(seconds[3])
+
+Therefore, one must do this instead:
+'''
+seconds.remove(1.4534345567)
+seconds.remove(1.023458894)
+seconds.remove(1.10001399445)
+
+
+
+
+
+
+'''
+Put first 50 characters into new file:
+This question is fairly easy but the solution wanted file.seek(0) into the answer
+'''
+string='123456'
+#print(string[:4]) #1234
+file=open('data\iris')
+content=file.read()
+print(content[50:])
+
+with open('data.txt', 'a+') as file:
+    file.seek(0) #puts the cursor at beginning
+    content=file.read()
+    file.seek(0) #puts cursor back at beginning again... for next person?
+    file.write(content)
+    file.write(content)
+    
+    
+    
+    
+    
+ '''
+ Pandas Section:
+ '''
+ import pandas as pd
+from geopy.geocoders import ArcGIS
+nom = ArcGIS()
+#df1=pd.DataFrame([[2, 4, 5], [10, 20, 30]], columns="Price", "Age", "Value")
+
+df=pd.read_csv("data/iris", header=None)
+df.columns=['One', 'Hi', 'Why', 't', 'Bye']
+
+df.set_index('Bye', inplace=True, drop=False) #inplace =True moves bye to 0 index.
+#Drop=false will have Bye as index and at original place (will be twice)
+
+#df=list(df.loc[:,'Bye']) #prints only Bye column
+#df=df.drop('Bye', 1)
+#df=df.ix[1,2] #locates specific item
+#df=df.drop(df.columns[0:3], 1) #Will drop first couple columns
+#l=len(df.index)
+
+df['test']=df.shape[0]*['North'] #creates a column named north
+df['test1']=df['test'] + ',' +"America" # Creates new column test1 called North,America
+
+
+
+'''
+Numpy Section:
+'''
+
+import numpy
+test=[[123, 12, 33],[],[]] 
+
+#n=numpy.arange(27) # 1 thru 1-27
+#n=n.reshape(3,3, 3)  #3 by 3 by 3 like a cube
+
+m=numpy.asarray([[123, 12, 33],[],[]] )
+print(m)
+
+# import cv2
+# im_g-csv2.imread("smallgray.png",1)
+# print(im_g)
+# cv2.imwrite("newsmallgray.png", im_g)
+im_g=im_g[0:2, 2:4]
+
+for i in im_g:
+    pass
+    #print(i) #prints without the double brackets
+ims=numpy.hstack((im_g, im_g)) #stacks horozontally
+ims=numpy.vstack((im_g, im_g)) #stacks vertically
+
+lst=numpy.hsplit(ims, 5) #num must be same as num of columns in np array
+'''
+#print(df)
+ 
