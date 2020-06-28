@@ -1,0 +1,20 @@
+'''
+Project 3: Build a simple website:
+'''
+from flask import Flask, render_template
+import IPython
+#https://stackoverflow.com/questions/51576756/display-render-an-html-file-inside-jupyter-notebook-on-google-colab-platform
+
+app=Flask(__name__)
+
+@app.route('/')
+def home():
+    app.route('/')
+    return render_template("home.html")
+
+@app.route('/about/')
+def about():
+    return "About content goes here!"
+
+if __name__=="__main__":
+    app.run(debug=False)
