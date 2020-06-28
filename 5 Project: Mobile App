@@ -1,0 +1,78 @@
+'''
+Application 5: Create a mobile app using python:
+'''
+
+import kivy.app import App
+from kivy.land import Builder
+import kivy.vix.screenmanager import ScreenManage.Screen
+
+Builder.load_file('design.kv')
+
+class LoginScreen(Screen):
+    def sign_up(self):
+        self.manager.current="sign_up_screen"
+
+class RootWidget(ScreenManager):
+    pass
+
+class SignUpScreen(Screen):
+    pass
+
+class MainApp(App):
+    def build(self):
+        return RootWidget()
+    
+if __name__== "__main__":
+    MainApp().run()
+    
+'''
+<RootWidget>:
+    LoginScreen:
+        GridLayout:
+            cols:1
+            GridLayout:
+                Label:
+                text:"User Login"
+                TextInput:
+                    hint_text: "Username"
+                TextInput:
+                    hint_text: "Password"
+                Button:
+                    text: "Login"
+    GridLayout:
+        cols: 2
+        Button:
+            text: "Forgot Password?"
+            
+        Button:
+            text: "Sign Up"
+            on_press:root.signup()
+
+<SignUpScreen>:
+    GridLayout:
+        cols:1
+    Label: 
+        text: "Sign up for a space journey"
+    LoginScreen:
+        name: "login_screen"
+    TextInput:
+        hint_text:"Username"
+    TextInput:
+        hint_text:"Password"
+    Button:
+        text:"Submit"
+        
+<RootWidget>:
+    LoginScreen:
+        name="Login_screen"
+    SignUpScreen:
+        name="sign_up_screen"
+        
+"""
+This section is completely pointless. Only 1% of the websites are run using Python.
+Instead, I would much rather use JavaScript like "normal" people.
+For example, I created an "Amazon" site using JavaScript, PHP, SQL, HTML5:
+https://github.com/ScottFrederickSchmidt/Amazon-like-site
+
+Note to self: if I finish this project, I stopped at part four.
+"""
