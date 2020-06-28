@@ -1,0 +1,52 @@
+'''
+Project 2: The Basemap
+
+Previous Working Code:
+#fg.add_child(folium.Marker(location = [38, -99], popup="Hi!", icon=folium.Icon(color='green')))
+#fg.add_child(folium.Marker(location = [37, -96], popup="Hi!", icon=folium.Icon(color='green'))) 
+
+
+# for cords in [[38, -99],[37, -96]]:
+#     fg.add_child(folium.Marker(location = cords, popup="Hi!", icon=folium.Icon(color='green')))
+
+
+for l1, l2, el in zip(lat, lon, elev):
+    fg.add_child(folium.Marker(location = [l1, l2], popup=str(el)+"m", icon=folium.Icon(color='green'))
+'''
+import folium 
+import pandas as pd
+
+df=pd.read_csv("data\Volcanoes.txt")
+#print(df.columns)
+lat=list(df['LAT'])
+lon=list(df['LON'])
+elev=list(df['ELEV'])
+
+
+def produce_color(elev):
+    if elev <1000:
+        return 'green'
+    elif 1000<=elev <3000:
+        return 'orange'
+    else:
+        return 'red'
+
+map = folium.Map(location = [38, -99], zoom_start = 6, tiles="Stamen Terrain")
+fg=folium.FeatureGroup(name="My Map")    
+
+for l1, l2, el in zip(lat, lon, elev):
+    fg.add_child(folium.CircleMarker(location = [l1, l2], popup=str(el)+"m", radius=6, icon=folium.Icon(produce_color(el) ),
+                                  fill_color=color(el), color='gray', fill=True, fill_opacity=0.7) )
+fgp=folium.FeatureGroup(name="Population")
+fgv=folium.FeatureGroup(name="Volcanoes")
+
+map.add_child(fgp)
+map.add_child(fgv)
+map.add_child(fg)
+map.add_child(folium.LayerControl() )
+map.save("map2.html")
+#print(dir(folium) )
+#fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig',
+#style_function=lambda x: {'fillColor':'yellow' if x['properties']['POP2005']<1_000_000 
+# else 'orange if 1000000' <= x['properties']['POP2005']< 2_000_000 else 'red'})) 
+map
