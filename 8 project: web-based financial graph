@@ -1,0 +1,36 @@
+'''
+Project 8: Web-based financial graph
+
+Got error: ValueError: expected an instance of type Title, got Candlestick Chart of type str
+
+Solved by?
+https://stackoverflow.com/questions/47733953/set-title-of-a-python-bokeh-plot-figure-from-outside-of-the-figure-functio
+'''
+from pandas_datareader import data
+import datetime
+from bokeh.plotting import show, figure, output_file
+
+start=datetime.datetime(2018, 1, 1)
+end=datetime.datetime(2018, 3, 1)
+
+df=data.DataReader(name="AAPL", data_source="yahoo", start=start, end=end)
+#df
+def inc_dec(c, o):
+    if c>o:
+        value="Increase"
+    elif c<o:
+        value="Decrease"
+    else:
+        value="Equal"
+    return value
+df["Status"]=[inc_dec(c,o) for c, o in zip(df.Close, df.Open)]
+df
+
+p=figure(x_axis_type='datetime', width=100, height=300 )
+#p.title='Candlestick Chart'
+
+hours_12=12*60*60*1000
+p.rect(df.index[df.Close> df.Open], (df.Open+df.Close)/2,
+    hours_12, abs(df.Open-df.Close), fill_color='green', line_color="black")
+p.rect(df.index[df.Close< df.Open], (df.Open+df.Close)/2,
+    hours_12, abs(df.Open-df.Close), fill_color='red', line_color="black")
