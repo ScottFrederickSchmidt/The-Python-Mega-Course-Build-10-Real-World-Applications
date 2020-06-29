@@ -1,0 +1,54 @@
+'''
+Project 7: Bokeh Data Visualization:
+'''
+import bokeh
+
+from bokeh.plotting import figure
+from bokeh.io import output_file, show
+import pandas as pd
+
+#prepare some data
+x=[1, 2, 3, 4, 5]
+y=[6, 7, 8, 9, 10]
+
+#prepare the output file:
+f=figure()
+
+#create line plot:
+f.line(x,y) # or f.triangle(x,y)
+
+show(f)
+
+
+'''
+Project 7: Bokeh Data Visualization:
+Weather Excel Practice
+'''
+import pandas
+from bokeh.plotting import figure, output_file, show
+
+df=pandas.read_excel("http://pythonhow.com/data/verlegenhuken.xlsx", sheet_name=0)
+df["Temperature"]=df["Temperature"]/10
+df["Pressure"]=df["Pressure"]/10
+
+p=figure(plot_width=500, plot_height=400, tools='pan')
+p.title.text_color="Gray"
+p.title.text_font="arial"
+p.title.text_font_style="bold"
+p.xaxis.axis_label="Temperature (C)"
+p.yaxis.axis_label="Pressure (hPa)"
+
+p.circle(df["Temperature"], df["Pressure"], size=0.5)
+show(p)
+
+'''
+import pandas
+from bokeh.plotting import figure, output_file, show
+
+df=pd.read_csv("http://www.google.com/finance/historical?q=NASDAQ:ADBE&startdate=Jan+01%2C+2012&enddate=Aug+2%2C+2015&output=csv", parse_dates="Date")
+p=figure(width=500, height=500, x_axis_type="datetime", responsive=True)
+
+p.line(df["Date"], df["Close"], color="Orange", alpha=0.5)
+'''
+
+'''
